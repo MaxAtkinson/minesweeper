@@ -9,7 +9,7 @@ class Board:
 				mine = bool(randint(0,1))
 				self.zones[x].append(Zone(x, y, bool(mine)))
 
-	def print_board(self):
+	def print_board(self, show_mines=False):
 		for x in self.zones:
 			print ' '.join(repr(y) for y in x)
 
@@ -19,7 +19,7 @@ class Board:
 			# Iterate over board columns
 			for j in range(len(self.zones)):
 				# If the current square isn't a mine
-				if not self.zones[i][j].hasMine():
+				if not self.zones[i][j].has_mine():
 					# Start counting the ones around it
 					count = 0
 					# Starting with the one before it on the row axis
@@ -31,7 +31,7 @@ class Board:
 							# If we're not out of bounds
 							if 0 <= p and p < len(self.zones) and 0 <= q and q < len(self.zones):
 								# Check this square has a mine
-								if self.zones[p][q].hasMine():
+								if self.zones[p][q].has_mine():
 									# If it does, increment the count to display
 									count += 1
 							q += 1
@@ -50,7 +50,7 @@ class Zone:
 		else:
 			self.state = 'O'
 
-	def hasMine(self):
+	def has_mine(self):
 		return self.state == 'M'
 
 	def __repr__(self):
