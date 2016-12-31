@@ -29,25 +29,16 @@ class Board:
         return False
 
     def count_adjacent_mines(self):
-        for i in range(len(self.zones)):
-            # Iterate over board columns
-            for j in range(len(self.zones)):
-                # If the current square isn't a mine
-                if not self.zones[i][j].has_mine():
-                    # Start counting the ones around it
-                    count = 0
-                    # Starting with the one before it on the row axis
-                    for p in range(i-1, i+2):
-                        # Then on the column axis
-                        for q in range(j-1, j+2):
-                            # If we're not out of bounds
-                            if p >= 0 and p < len(self.zones) and q >= 0 and q < len(self.zones):
-                                # Check this square has a mine
-                                if self.zones[p][q].has_mine():
-                                    # If it does, increment the count to display
-                                    count += 1
-                    # Set the count
-                    if self.zones[i][j].is_uncovered():
+        for i in range(len(self.zones)):                                                            # Iterate over board columns
+            for j in range(len(self.zones)):                                                        # Iterate over board rows
+                if not self.zones[i][j].has_mine():                                                 # If the current zone isn't a mine
+                    count = 0                                                                       # Count those around it
+                    for p in range(i-1, i+2):                                                       # Starting on the row axis
+                        for q in range(j-1, j+2):                                                   # Then on the column axis
+                            if p >= 0 and p < len(self.zones) and q >= 0 and q < len(self.zones):   # If in bounds...
+                                if self.zones[p][q].has_mine():                                     # Check this square has a mine
+                                    count += 1                                                      # If it does, increment count
+                    if self.zones[i][j].is_uncovered():                                             # Set the count
                         if count > 0:
                             self.zones[i][j].state = str(count)
                         else:
