@@ -11,7 +11,6 @@ class Board:
                 mine = bool(randint(0,9) < 1)
                 if mine: self.no_mines_left += 1
                 self.zones[x].append(Zone(x, y, mine))
-        print str(self.no_mines_left) + ' mines left.'
 
     def print_board(self, show_mines=False):
         if show_mines:
